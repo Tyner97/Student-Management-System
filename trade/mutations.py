@@ -1,8 +1,8 @@
 import graphene
-from .models import Student, Course
-from .types import StudentType
 import graphql_jwt
-from trade.mutations import CreateStudent
+from trade.models import Student, Course
+from trade.types import StudentType
+
 
 class CreateStudent(graphene.Mutation):
     student = graphene.Field(StudentType)
@@ -17,12 +17,18 @@ class CreateStudent(graphene.Mutation):
             raise Exception("Age cannot be negative")
 
         course = Course.objects.get(id=course_id)
-        student = Student.objects.create(name=name, age=age, course=course)
+        student = Student.objects.create(
+            name=name,
+            age=age,
+            course=course
+        )
         return CreateStudent(student=student)
+
+
 class Mutation(graphene.ObjectType):
     create_student = CreateStudent.Field()
+
+    # JWT mutations
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     refresh_token = graphql_jwt.Refresh.Field()
     verify_token = graphql_jwt.Verify.Field()
-
-schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -39,10 +39,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'trade',
     'graphene_django',
+    
+     'graphql_jwt.refresh_token',  # optional if using refresh tokens
 ]
 
+
+    
+    
+    
+    
+    
+
+
 GRAPHENE ={
-    "SCHEMA": "Trade.schema.schema"
+    "SCHEMA": "demo.schema.schema"
 }
 
 MIDDLEWARE = [
@@ -53,7 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "graphql_jwt.middleware.JSONWebTokenMiddleware",
+  #  "graphql_jwt.middleware.JSONWebTokenMiddleware",#
+   # "graphql_jwt.middleware.JSONWebTokenMiddleware",#
 ]
 
 
